@@ -2,7 +2,29 @@
 (function() {
   define(function(require, exports, module) {
     var table;
-    table = Backbone.Model.extend();
+    table = Backbone.Model.extend({
+      getTableFields: function() {
+        var fields;
+        fields = this.get('fields');
+        return fields;
+      },
+      getTableEmptyItem: function() {
+        var fields, item;
+        item = {};
+        item.fields = [];
+        item.table_id = this.get('id');
+        fields = this.get('fields');
+        _.each(fields, function(fieldObj) {
+          var field;
+          field = {};
+          field.id = fieldObj.id;
+          field.name = fieldObj.name;
+          field.value = '';
+          return item.fields.push(field);
+        });
+        return item;
+      }
+    });
     return module.exports = table;
   });
 

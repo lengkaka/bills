@@ -32,7 +32,7 @@
           return Content.layout.header.show(headerListView);
         },
         showTableContent: function(tableId, tableModel, type) {
-          var createView, deleteView, fields, listView;
+          var createView, deleteView, fields, loadingView;
           if (type === 'edit') {
             fields = App.request('tables:content:createTable', tableModel.get('fields'));
             createView = new Content.createView({
@@ -48,8 +48,28 @@
             });
             return Content.layout.detail.show(deleteView);
           } else {
-            listView = new Content.list();
-            return Content.layout.detail.show(listView);
+            loadingView = new LoadingView();
+            Content.layout.detail.show(loadingView);
+            WJ.dc.request('collection/item', {
+              tableId: tableId
+            }).then((function(_this) {
+              return function(_arg) {
+                var entityCollection, listView, result;
+                entityCollection = _arg.entity, result = _arg.data;
+                WJ.log(entityCollection);
+                listView = new Content.list({
+                  itemCollection: entityCollection,
+                  tableId: tableId,
+                  tableModel: tableModel,
+                  type: type
+                });
+                Content.layout.detail.show(listView);
+                return false;
+              };
+            })(this)).then(function(params) {
+              return false;
+            });
+            return null;
           }
         },
         showTable: function(tableId, tableModel) {

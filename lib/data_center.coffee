@@ -6,8 +6,10 @@ define (require, exports, module) ->
 
         models:
             table: require 'model/table'
+            item: require 'model/item'
         collections:
             table: require 'collection/table'
+            item: require 'collection/item'
 
         _cache: new Backbone.Model
 
@@ -108,6 +110,7 @@ define (require, exports, module) ->
                 entity = @_cache.get key
             else
                 entity = new Entity
+                entity.status = @entityStatus.NOT_READY
                 @_cache.set key, entity
 
             promiseKey = '_promise'
@@ -146,6 +149,7 @@ define (require, exports, module) ->
                             entity.reset result
                         else
                             entity.set result
+                        entity.status = @entityStatus.READY
                         resolve entity: entity, data: result, cache: false
                         null
                     .then null, =>
@@ -191,6 +195,7 @@ define (require, exports, module) ->
                 value = data[key]
                 delete data[key]
                 value
+            entity.status = @entityStatus.PROCESSING
             RSVP.Promise.resolve(WJ.ajax baseUrl + url, type: "GET", dataType: 'json', data: data, xhrFields:{'Access-Control-Allow-Origin': '*'})
 
         # Private: 整理服务器返回数据
@@ -221,9 +226,15 @@ define (require, exports, module) ->
                     entity = @_cache.get key
                 else
                     entity = new Entity
+                    entity.status = @entityStatus.NOT_READY
                     @_cache.set key, entity
 
                 return entity
             null
+
+        entityStatus:
+            NOT_READY: 10000
+            PROCESSING: 10001
+            READY: 10002
 
     module.exports = DataCenter

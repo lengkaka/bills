@@ -84,7 +84,6 @@ body {
     margin-top: 0;
 }
 
-
 /*
  * Placeholder dashboard ideas
  */
@@ -114,7 +113,6 @@ body {
  */
 .table_content {
     margin-left: 170px;
-    height: 80px
 }
 .table_content .header_list {
     margin-top: 10px;
@@ -142,4 +140,28 @@ body {
     margin-top: 20px;
     margin-left: 10px;
     width: 100%;
+}
+#content_region_detail {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+#item_list {
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+div.table-items {
+    overflow: auto;
+    width: 800px;
+    max-height: 600px;
+}
+
+/*
+table
+*/
+.table-operation {
+    margin-top: 8px;
+}
+input.table_checkbox {
+    position: relative;
+    margin-left: 19px
 }
