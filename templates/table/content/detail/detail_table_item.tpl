@@ -3,7 +3,7 @@
         {{values.index}}
     </td>
     {{#each values.fields}}
-        <td field_id="{{this.id}}" tabindex="1" style="cursor: pointer;">{{this.value}}</td>
+        <td field_id="{{this.id}}" title="{{this.value}}" field_type="{{this.type}}" tabindex="1" style="cursor: pointer;">{{this.value}}</td>
     {{/each}}
     <td>
         <span style="cursor: pointer;" class="glyphicon glyphicon-pencil"></span>

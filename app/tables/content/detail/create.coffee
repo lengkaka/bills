@@ -34,10 +34,24 @@ define (require, exports, module) ->
             _submitAction: (e)->
                 # check submit content
                 formData = form2js 'create_table_form', '.', true, null
-                console.log formData
+                # processFormData
+                @_processFormData formData
                 # submit data
                 @_crossDomainSubmit formData
                 false
+
+            _processFormData: (data)->
+                if data
+                    fields = data.fields
+                    typeChina2Pinyin =
+                        '字符串': 'string'
+                        '数字': 'number'
+                        '日期': 'date'
+                    if fields
+                        _.each fields, (field)->
+                            field.type = typeChina2Pinyin[field.type]
+
+                return data
 
             _crossDomainSubmit: (data)->
 

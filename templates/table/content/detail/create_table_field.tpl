@@ -6,8 +6,9 @@
 </div>
 <div class="col-xs-3">
     <select class="form-control" name="fields[{{id}}][type]">
-        <option {{#compare type '==' '字符串'}}selected{{/compare}}>字符串</option>
-        <option {{#compare type '==' '数字'}}selected{{/compare}}>数字</option>
+        <option {{#compare type '==' 'string'}}selected{{/compare}}>字符串</option>
+        <option {{#compare type '==' 'number'}}selected{{/compare}}>数字</option>
+        <option {{#compare type '==' 'date'}}selected{{/compare}}>日期</option>
     </select>
 </div>
 <div class="col-xs-1 add_field" wj_add_field_id="{{id}}">

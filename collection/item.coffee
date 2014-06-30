@@ -3,8 +3,8 @@ define (require, exports, module) ->
     item = Backbone.Collection.extend(
         id: 'id'
         model: itemModel
-        url: '/tables/items'
-
+        url: '/tables/:tableId/items'
+        apiParams: ['tableId']
         getItemsArray: ()->
             return _.cloneDeep this.models.toJSON()
     )
