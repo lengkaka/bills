@@ -65,7 +65,7 @@ class Helper_StaticCompile {
             foreach($tpls as $tpl) {
                 $source_file_path = $tpl;
                 $compile_file_path = $tpl . '.js';
-                self::_compile_jsTemplate($source_file_path, $compile_file_path);
+                self::compile_Template($source_file_path, $compile_file_path);
             }
         }
     }
@@ -77,7 +77,7 @@ class Helper_StaticCompile {
      * @param  string $tpl_id 模版ID（确定此模版的唯一标识，一般为此模版的绝对URL地址）
      * @param  string $tpl 原始模版文件数据
      */
-    private static function _compile_jsTemplate($source_file_path, $compile_file_path) {
+    public static function compile_Template($source_file_path, $compile_file_path) {
 
         if (!$source_file_path|| !$compile_file_path) {
             return '';
@@ -109,6 +109,13 @@ class Helper_StaticCompile {
 
         return true;
     }
-}
+};
 
-Helper_StaticCompile::compile_jsTemplate();
+if (count($argv) > 1) {
+    $tpl = $argv[1];
+    $source_file_path = $tpl;
+    $compile_file_path = $tpl . '.js';
+    Helper_StaticCompile::compile_Template($source_file_path, $compile_file_path);
+} else {
+    Helper_StaticCompile::compile_jsTemplate();
+}
