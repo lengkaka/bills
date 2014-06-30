@@ -18,6 +18,5 @@ define (require, exprots, module) ->
 
               #  else if tableAction is 'editTable'
 
-                console.log '111'
                 console.log App.params
                 console.log App.router

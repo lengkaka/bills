@@ -7,7 +7,6 @@ body {
     padding-top: 50px;
 }
 
-
 /*
  * Global add-ons
  */
@@ -84,7 +83,6 @@ body {
     margin-top: 0;
 }
 
-
 /*
  * Placeholder dashboard ideas
  */
@@ -114,7 +112,6 @@ body {
  */
 .table_content {
     margin-left: 170px;
-    height: 80px
 }
 .table_content .header_list {
     margin-top: 10px;
@@ -142,4 +139,84 @@ body {
     margin-top: 20px;
     margin-left: 10px;
     width: 100%;
+}
+#content_region_detail {
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 40px;
+}
+#item_list {
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+div.table-items-detail {
+    width: 800px;
+    max-height: 600px;
+}
+
+/*
+table
+*/
+.table {
+    width: auto;
+}
+.table-header-index {
+    min-width: 60px;
+}
+.table-header-row {
+    min-width: 150px;
+}
+.table-operation {
+    margin-top: 8px;
+    margin-right: 10px
+}
+.table-date-set {
+    margin-top: 8px;
+    width: 200px;
+}
+#set-date {
+    width: 100px;
+    margin-right: 20px;
+    float: none;
+}
+#filter_by_created_on {
+    float: none;
+    border-radius: 3px;
+}
+.table-items-detail-content {
+    max-width: 800px;
+    max-height: 100px;
+}
+.table-items-detail-content-header {
+    max-width: 800px;
+    height: 38px;
+    -ms-overflow: hidden; /* for ie */
+    overflow: hidden;
+
+    position: absolute;
+    top: 265px;
+    left: 180px;
+    background-color:white;
+}
+.table-items-detail-content-main {
+    max-width: 800px;
+    max-height: 100px;
+    overflow: auto;
+}
+.table-items-detail-content-main-row-div {
+    padding:0px;
+    border:1px solid #e0e0e0;
+    -webkit-border-radius: 3px;
+    width: 130px;
+    background-color: #ffffff;
+}
+.table-items-detail-content-main-row-div-row {
+    width: 100%;
+    height: 120%;
+    border: none;
+    background-color: #ffffff;
+}
+input.table_checkbox {
+    position: relative;
+    margin-left: 19px
 }

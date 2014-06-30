@@ -44,8 +44,18 @@ define (require, exports, module) ->
                     Content.layout.detail.show deleteView
                 else
                     # show items
-                    listView = new Content.list()
-                    Content.layout.detail.show listView
+                    loadingView = new LoadingView();
+                    Content.layout.detail.show loadingView
+                    WJ.dc.request 'collection/item', {tableId: tableId}
+                        .then ({entity: entityCollection, data: result})=>
+                            WJ.log entityCollection
+                            listView = new Content.list({itemCollection: entityCollection, tableId: tableId, tableModel: tableModel, type: type})
+                            Content.layout.detail.show listView
+                            false
+                        .then (params)->
+                            # do error tips
+                            false
+                    null
 
             showTable: (tableId, tableModel)->
                 do @_showLayout
