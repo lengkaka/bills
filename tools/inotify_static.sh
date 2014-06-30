@@ -1,12 +1,14 @@
 #!/bin/bash
 
 task_start() {
-    #_cmd=`nohup fswatch .. coffee_static.sh >/dev/null 2>&1 &`
-    #_cmd=`nohup fswatch .. coffee_static.sh > log.out 2>&1 &`
-    _cmd=`nohup fswatch .. 'sh coffee_static.sh' >/dev/null 2>&1 &`
-    #_cmd=`nohup fswatch .. 'ls' > log.out 2>&1  &`
-    #_cmd=`nohup fswatch .. 'find .. -type f -name "*.coffee" | xargs coffee -c' > log.out 2>&1  &`
-    #_cmd=`nohup fswatch .. ls > log.out 2>&1 &` 
+    _sys=`uname`
+    if [ "$_sys" == "Linux" ] ; then
+        echo "Is Linux"
+        _cmd=`nohup sh inotify_static_linux.sh >/dev/null 2>&1 &`
+    elif [ "$_sys" == "Darwin" ] ; then
+        echo "Is MAC"
+        _cmd=`nohup fswatch .. 'sh coffee_static.sh' >/dev/null 2>&1 &`
+    fi
     echo $_cmd
 }
 
