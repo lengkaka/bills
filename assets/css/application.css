@@ -185,7 +185,7 @@ table
 }
 .table-items-detail-content {
     max-width: 800px;
-    max-height: 100px;
+    max-height: 600px;
 }
 .table-items-detail-content-header {
     max-width: 800px;
@@ -200,7 +200,7 @@ table
 }
 .table-items-detail-content-main {
     max-width: 800px;
-    max-height: 100px;
+    max-height: 600px;
     overflow: auto;
 }
 .table-items-detail-content-main-row-div {
