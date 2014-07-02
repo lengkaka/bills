@@ -71,11 +71,13 @@ define (require, exports, module) ->
                         true
                     deleteRow: ($customTable, index)=>
                         console.log arguments
-                        index = @options.itemCollection.length - index - 1
-                        editItemModel = @options.itemCollection.at index
-                        if editItemModel && editItemModel.mode isnt 'create'
-                            @_removeItemToServer editItemModel
-                        true
+                        $('#delete-dialog').modal()
+                        #index = @options.itemCollection.length - index - 1
+                        #editItemModel = @options.itemCollection.at index
+                        #if editItemModel && editItemModel.mode isnt 'create'
+                        #    @_removeItemToServer editItemModel
+                        #true
+                        false
                     change: ()->
                         console.log arguments
                     selected: ()->
