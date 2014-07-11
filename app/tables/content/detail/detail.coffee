@@ -22,11 +22,9 @@ define (require, exports, module) ->
                     do @_enterEditStatus
 
             _editAction: (e)->
-                console.log 'edit'
                 do @_enterEditStatus
 
             _saveAction: (e)->
-                console.log 'save'
                 do @_outEditStatus
                 # update data
                 do @_updateItem
@@ -99,7 +97,6 @@ define (require, exports, module) ->
                     else
                         url = "#{url}/item/update"
                     data = itemModel.toJSON()
-                    delete data['index']
                     delete data['mode']
                     WJ.ajax(
                         type: "POST",
