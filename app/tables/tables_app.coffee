@@ -12,6 +12,7 @@ define (require, exports, module) ->
                 'tables': 'listTables'
                 'tables/create': 'createTable'
                 'tables/:id': 'showTable'
+                'tables/:id/statistics': 'statisticsTable'
                 'tables/:id/edit': 'editTable'
                 'tables/:id/delete': 'deleteTable'
 
@@ -23,7 +24,6 @@ define (require, exports, module) ->
 
         API =
             showTableLayoutAndNav: (action, tableId)->
-
                 # show loading
                 loadingView = new LoadingView();
                 App.mainRegion.show loadingView
@@ -59,6 +59,8 @@ define (require, exports, module) ->
 
                 if action is 'showTable'
                     App.commands.execute 'showTable', tableId, entityCollection.get(tableId)
+                else if action is 'statisticsTable'
+                    App.commands.execute 'statisticsTable', tableId, entityCollection.get(tableId)
                 else if action is 'editTable'
                     App.commands.execute 'editTable', tableId, entityCollection.get(tableId)
                 else if action is 'deleteTable'
@@ -76,6 +78,11 @@ define (require, exports, module) ->
                 App.router.action = 'tables:showTable'
                 App.params.tableId = tableId
                 @showTableLayoutAndNav 'showTable', tableId
+
+            statisticsTable: (tableId)->
+                App.router.action = 'tables:statisticsTable'
+                App.params.tableId = tableId
+                @showTableLayoutAndNav 'statisticsTable', tableId
 
             # edit table
             editTable: (tableId) ->
@@ -96,15 +103,6 @@ define (require, exports, module) ->
 
         App.on 'tables:list', () ->
             do API.listTables
-
-        App.on 'tables:show', (tableId) ->
-            do API.showTable tableId
-
-        App.on 'tables:edit', (tableId) ->
-            do API.editTable tableId
-
-        App.on 'tables:delete', (tableId) ->
-            do API.deleteTable tableId
 
         App.addInitializer ()->
             new Tables.Router({controller: API})

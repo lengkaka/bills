@@ -22,22 +22,27 @@ define (require, exports, module) ->
                 'click li': '_selectHeaderAction'
 
             onBeforeRender: ()->
-                if @options.type is 'view'
-                    headerId = '1'
-                else if @options.type is 'edit'
-                    headerId = '2'
-                else if @options.type is 'delete'
-                    headerId = '3'
-                @_updateCurrentHeader headerId
+                @updateActiveType @options.type
 
             _selectHeaderAction: (e)->
                 $target = $(e.currentTarget)
                 headerId = parseInt $target.attr('table_header_id')
                 @_updateCurrentHeader headerId
-                # tell the table content to show
                 false
 
-            _updateCurrentHeader: (headerId)->
+            updateActiveType: (type)->
+                if type is 'view'
+                    headerId = '1'
+                else if type is 'statistics'
+                    headerId = '2'
+                else if type is 'edit'
+                    headerId = '3'
+                else if type is 'delete'
+                    headerId = '4'
+                @_setActiveType headerId
+                @options.type = type
+
+            _setActiveType: (headerId)->
                 false if headerId?
                 null if headerId is @headerId
 
@@ -45,10 +50,17 @@ define (require, exports, module) ->
                 @headerId = headerId
                 @collection.setActiveStatus @headerId, true
 
+            _updateCurrentHeader: (headerId)->
+                # update collection
+                @_setActiveType(headerId)
+
+                # update url
                 url = "/tables/#{@options.tableId}"
                 type = @collection.get(@headerId).get('type');
                 if type is 'view'
                     App.navigate url
+                else if type is 'statistics'
+                    App.navigate "#{url}/statistics"
                 else if type is 'edit'
                     App.navigate "#{url}/edit"
                 else if type is 'delete'
@@ -57,8 +69,3 @@ define (require, exports, module) ->
                 # tell content to show
                 App.commands.execute 'showTableContent', @options.tableId, @options.tableModel, type
                 false
-
-            onRender: ->
-                # make sure nav active
-                console.log '111'
-

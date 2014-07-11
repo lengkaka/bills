@@ -6,6 +6,7 @@ define (require, exports, module) ->
     require 'app/tables/content/detail/create'
     require 'app/tables/content/detail/detail'
     require 'app/tables/content/detail/delete'
+    require 'app/tables/content/detail/statistics'
 
     LoadingView = require 'app/loading_view'
     App.module 'TablesApp.content', (Content, App) ->
@@ -22,8 +23,8 @@ define (require, exports, module) ->
 
             _showTableHeader: (tableId, tableModel, type)->
                 headerItems = App.request 'tables:content:headers'
-                headerListView = new Content.header.list({collection: headerItems, tableId: tableId, tableModel: tableModel, type: type})
-                Content.layout.header.show headerListView
+                contentHeaderView = new Content.header.list({collection: headerItems, tableId: tableId, tableModel: tableModel, type: type})
+                Content.layout.header.show contentHeaderView
 
             ##
             # showTableContent
@@ -42,11 +43,11 @@ define (require, exports, module) ->
                     # show delete
                     deleteView = new Content.deleteView({tableId: tableId, tableModel: tableModel})
                     Content.layout.detail.show deleteView
-                else
+                else if type is 'view'
                     # show items
                     loadingView = new LoadingView();
                     Content.layout.detail.show loadingView
-                    WJ.dc.request 'collection/item', {tableId: tableId}
+                    WJ.dc.request 'collection/item', {tableId: tableId}, {fetch: false}
                         .then ({entity: entityCollection, data: result})=>
                             #WJ.log entityCollection
                             listView = new Content.list({collection: entityCollection, tableId: tableId, model: tableModel, type: type})
@@ -56,10 +57,22 @@ define (require, exports, module) ->
                             # do error tips
                             false
                     null
+                else if type is 'statistics'
+                    loadingView = new LoadingView();
+                    Content.layout.detail.show loadingView
+                    # get statistics data
+                    statisticsView = new Content.statisticsView()
+                    Content.layout.detail.show statisticsView
 
             showTable: (tableId, tableModel)->
                 do @_showLayout
                 @_showTableHeader tableId, tableModel, 'view'
+                @showTableContent tableId, tableModel, 'view'
+
+            statisticsTable: (tableId, tableModel)->
+                do @_showLayout
+                @_showTableHeader tableId, tableModel, 'statistics'
+                @showTableContent tableId, tableModel, 'statistics'
 
             editTable: (tableId, tableModel)->
                 do @_showLayout
@@ -80,9 +93,11 @@ define (require, exports, module) ->
         # 接收通知
         App.commands.setHandler 'showTableContent', (tableId, tableModel, type)->
             Content.controller.showTableContent tableId, tableModel, type
-
+        # receive app.commands from router
         App.commands.setHandler 'showTable', (tableId, tableModel)->
             Content.controller.showTable tableId, tableModel
+        App.commands.setHandler 'statisticsTable', (tableId, tableModel)->
+            Content.controller.statisticsTable tableId, tableModel
         App.commands.setHandler 'editTable', (tableId, tableModel)->
             Content.controller.editTable tableId, tableModel
         App.commands.setHandler 'deleteTable', (tableId, tableModel)->

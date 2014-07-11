@@ -28,7 +28,7 @@ define (require, exports, module) ->
             onBeforeRender: () ->
                 if App.router.action is 'tables:createTable'
 
-                else if App.router.action is 'tables:editTable' or App.router.action is 'tables:showTable'
+                else
                     @collection.setSidebarActiveStatus App.params.tableId, true
                     @curTableId = App.params.tableId
 

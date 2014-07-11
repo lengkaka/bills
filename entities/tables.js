@@ -61,10 +61,14 @@
               type: 'view'
             }, {
               id: 2,
+              name: '统计',
+              type: 'statistics'
+            }, {
+              id: 3,
               name: '编辑',
               type: 'edit'
             }, {
-              id: 3,
+              id: 4,
               name: '删除',
               type: 'delete'
             }
