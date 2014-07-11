@@ -8,7 +8,7 @@
                 <div class="form-group">
                     <input type="text" id="search" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button id="search_bt" type="button" class="btn btn-default">搜索</button>
             </form>
             <div class="table-operation btn-group">
                 <button type="button" id="create_row" class="btn btn-success">新建Item</button>
@@ -37,14 +37,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">Modal title</h4>
+                        <h4 class="modal-title">删除item</h4>
                     </div>
                     <div class="modal-body">
                         <p>One fine body&hellip;</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="ok">Save changes</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->

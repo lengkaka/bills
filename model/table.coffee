@@ -16,7 +16,7 @@ define (require, exports, module) ->
                 field.type = fieldObj.type
                 field.value = ''
                 item.fields.push field
-            item.created_on = WJ.core.getFormatDateString()
+            item.created_on = WJ.core.getFormatDateTime()
             return item
 
         getFullItem: (itemObj)->

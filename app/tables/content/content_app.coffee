@@ -48,8 +48,8 @@ define (require, exports, module) ->
                     Content.layout.detail.show loadingView
                     WJ.dc.request 'collection/item', {tableId: tableId}
                         .then ({entity: entityCollection, data: result})=>
-                            WJ.log entityCollection
-                            listView = new Content.list({itemCollection: entityCollection, tableId: tableId, tableModel: tableModel, type: type})
+                            #WJ.log entityCollection
+                            listView = new Content.list({collection: entityCollection, tableId: tableId, model: tableModel, type: type})
                             Content.layout.detail.show listView
                             false
                         .then (params)->
