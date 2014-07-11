@@ -67,8 +67,10 @@ define (require, exports, module) ->
                 if @status?
                     @status = 'view'
                 return @status
+
             _isEditStatus: ->
                 return @_getStatus() is 'edit'
+
             _updateStatus: (status)->
                 @status = status
 
@@ -198,7 +200,9 @@ define (require, exports, module) ->
                 # bind search
                 @searchInput = @$el.find('#search');
                 @searchInput.bind 'keyup', (e)=>
-                    console.log $(e.currentTarget).val()
+                    #console.log $(e.currentTarget).val()
+                    do @_filterByKeywordAction
+
                 # if has collection render header
                 if @options.collection.length > 0
                     do @_renderHeaders
@@ -244,14 +248,13 @@ define (require, exports, module) ->
                     itemView.filterByKeyword keyword
 
             removeSingleItem: (itemView, index, itemModel)->
-
                 @$('#delete-dialog').modal()
                 @$("#delete-dialog").on "shown.bs.modal", =>
                     @$("#delete-dialog #ok").on "click", (e)=>
                         @$("#delete-dialog").modal('hide');     # dismiss the dialog
                         @_removeItemModel itemModel
-
                 false
+
             _removeItemModel: (itemModel)->
                 if itemModel
                     if itemModel.get('mode') is 'create'
@@ -285,6 +288,7 @@ define (require, exports, module) ->
                     scrollLeft =  @$fixedHeaderTable.scrollLeft()
                     if scrollLeft isnt @$container.scrollLeft()
                         @$container.scrollLeft(scrollLeft)
+
             _hideHeader: ->
                 $table = @$el.find('table#mainTable');
                 $thead = $table.find('thead')
