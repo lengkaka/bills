@@ -1,5 +1,5 @@
 define (require, exports, module) ->
-    App = require 'app/application'
+    App = require 'module/application'
     App.module 'NavApp.List', (List, App) ->
         List.Header = Marionette.CompositeView.extend(
             template: require 'templates/header/header.tpl'
@@ -32,7 +32,7 @@ define (require, exports, module) ->
                 @trigger 'brand:clicked'
             setActiveNav: (name) ->
                 if name
-                    navModel = _.find @collection.models, (model) ->
+                    navModel = _.find @options.collection.models, (model) ->
                         (model.get 'url') is name
                     if navModel
                         navModel.set 'status', 'active'

@@ -1,6 +1,6 @@
 define (require, exports, module) ->
     
-    App = require 'app/application'
+    App = require 'module/application'
     
     App.module 'NavApp.List', (List, App) ->
         List.controller =

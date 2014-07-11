@@ -1,14 +1,14 @@
 define (require, exports, module) ->
 
-    App = require 'app/application'
-    require 'app/tables/content/content_layout'
-    require 'app/tables/content/header/header_view'
-    require 'app/tables/content/detail/create'
-    require 'app/tables/content/detail/detail'
-    require 'app/tables/content/detail/delete'
-    require 'app/tables/content/detail/statistics'
+    App = require 'module/application'
+    require 'view/tables/content/content_layout'
+    require 'view/tables/content/header/header_view'
+    require 'view/tables/content/detail/create'
+    require 'view/tables/content/detail/detail'
+    require 'view/tables/content/detail/delete'
+    require 'view/tables/content/detail/statistics'
 
-    LoadingView = require 'app/loading_view'
+    LoadingView = require 'view/loading_view'
     App.module 'TablesApp.content', (Content, App) ->
         Content.controller =
 

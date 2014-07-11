@@ -1,5 +1,5 @@
 define (require, exports, module) ->
-    App = require 'app/application'
+    App = require 'module/application'
     App.module 'Entities.tables', (tables, App) ->
 
         # sidebar

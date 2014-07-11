@@ -1,5 +1,5 @@
 define (require, exports, module) ->
-    App = require 'app/application'
+    App = require 'module/application'
     App.module 'TablesApp', (Tables, App) ->
         layout = require 'templates/table/table_layout.tpl'
         Tables.Layout = Marionette.Layout.extend(

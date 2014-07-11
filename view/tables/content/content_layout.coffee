@@ -1,5 +1,5 @@
 define (require, exprots, module) ->
-    App = require 'app/application'
+    App = require 'module/application'
     App.module 'TablesApp.content', (Content, App) ->
         layout = require 'templates/table/content/content_layout.tpl'
         Content.Layout = Marionette.Layout.extend

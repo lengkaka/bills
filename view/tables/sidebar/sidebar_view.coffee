@@ -1,5 +1,5 @@
 define (require, exports, module) ->
-    App = require 'app/application'
+    App = require 'module/application'
     TableSidebar = require 'templates/table/sidebar/table_sidebar.tpl'
     TableSidebarItem = require 'templates/table/sidebar/table_sidebar_item.tpl'
     App.module 'TablesApp.Sidebar', (Sidebar, App) ->

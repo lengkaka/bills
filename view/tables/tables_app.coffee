@@ -1,10 +1,10 @@
 define (require, exports, module) ->
-    App = require 'app/application'
-    require 'app/tables/tables_layout'
-    require 'app/tables/sidebar/sidebar_view'
-    require 'app/tables/content/content_layout'
-    require 'app/tables/content/content_app'
-    LoadingView = require 'app/loading_view'
+    App = require 'module/application'
+    require 'view/tables/tables_layout'
+    require 'view/tables/sidebar/sidebar_view'
+    require 'view/tables/content/content_layout'
+    require 'view/tables/content/content_app'
+    LoadingView = require 'view/loading_view'
 
     App.module 'TablesApp', (Tables, App) ->
         Tables.Router = Marionette.AppRouter.extend

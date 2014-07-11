@@ -1,8 +1,8 @@
 define (require, exports, module) ->
     # app_router
-    router = require('app/application_router')
+    router = require('module/application_router')
     # app_controller
-    appController = require('app/application_controller')
+    appController = require('module/application_controller')
 
     app = new Marionette.Application()
     

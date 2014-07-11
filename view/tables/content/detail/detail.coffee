@@ -1,6 +1,6 @@
 define (require, exports, module) ->
 
-    App = require 'app/application'
+    App = require 'module/application'
     viewHelper = require 'view_helper'
     itemModel = require 'model/item'
 

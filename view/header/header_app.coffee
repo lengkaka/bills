@@ -1,8 +1,8 @@
 define (require, exports, module) ->
     
-    App = require 'app/application'
-    require 'app/header/list/list_controller'
-    require 'app/header/list/list_view'
+    App = require 'module/application'
+    require 'view/header/list/list_controller'
+    require 'view/header/list/list_view'
     
     App.module 'NavApp', (Nav, App) ->
         API =
