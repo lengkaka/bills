@@ -138,6 +138,7 @@ define (require, exports, module) ->
         Content.list = Marionette.CompositeView.extend
             className: 'table_list'
             template: require 'templates/table/content/detail/detail_table.tpl'
+            modalTemplate: require 'templates/modal.tpl'
             headerTemplate: require 'templates/table/content/detail/detail_table_header.tpl'
             itemView: Content.itemView
             emptyView: EmptyView
@@ -154,13 +155,17 @@ define (require, exports, module) ->
                 viewOptions
 
             buildItemView: (item, ItemViewType, itemViewOptions) ->
+                item = @model.getCompleteItem item
                 options = _.extend {model: item}, itemViewOptions
                 view = new ItemViewType(options);
                 view
 
             onAfterItemAdded: (itemView)->
                 index = _.indexOf @options.collection.models, itemView.options.model
-                itemView.updateIndex itemView.options.index
+                length = @options.collection.length
+                # empty view also callback
+                if index isnt -1
+                    itemView.updateIndex length - index
 
             onItemRemoved: (itemView)->
                 # if has no items，show empty
@@ -248,11 +253,15 @@ define (require, exports, module) ->
                     itemView.filterByKeyword keyword
 
             removeSingleItem: (itemView, index, itemModel)->
+                item = itemModel
+                @$el.append(@modalTemplate({title: '删除item', content: '删除后将不能恢复'}));
                 @$('#delete-dialog').modal()
                 @$("#delete-dialog").on "shown.bs.modal", =>
                     @$("#delete-dialog #ok").on "click", (e)=>
                         @$("#delete-dialog").modal('hide');     # dismiss the dialog
-                        @_removeItemModel itemModel
+                        @$('#delete-dialog').on 'hidden.bs.modal', (e)=>
+                            do @$('#delete-dialog').remove
+                        @_removeItemModel item
                 false
 
             _removeItemModel: (itemModel)->

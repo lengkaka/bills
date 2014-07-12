@@ -32,6 +32,19 @@ define (require, exports, module) ->
                 itemObj.fields = fields
 
             return itemObj
+
+        getCompleteItem: (item)->
+            if item
+                fields = @get('fields')
+                fields = _.cloneDeep fields
+                _.each fields, (fieldObj)->
+                    itemField = _.find item.get('fields'), (field) ->
+                        return field.id + '' is fieldObj.id + ''
+                    fieldObj.value = ''
+                    if itemField
+                        fieldObj.value = itemField.value
+                item.set('fields', fields);
+            item
     )
 
     module.exports = table
