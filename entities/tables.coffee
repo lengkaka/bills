@@ -1,5 +1,5 @@
 define (require, exports, module) ->
-    App = require 'app/application'
+    App = require 'module/application'
     App.module 'Entities.tables', (tables, App) ->
 
         # sidebar
@@ -41,8 +41,9 @@ define (require, exports, module) ->
             getContentHeaders: ()->
                 tables.contentHeaders = new tables.contentHeaderCollection([
                     {id:1, name: '浏览', type: 'view'},
-                    {id:2, name: '编辑', type: 'edit'},
-                    {id:3, name: '删除', type: 'delete'}
+                    {id:2, name: '统计', type: 'statistics'},
+                    {id:3, name: '编辑', type: 'edit'},
+                    {id:4, name: '删除', type: 'delete'}
                 ])
             # create or edit
             getContentCreateFields: (fieldsArray)->

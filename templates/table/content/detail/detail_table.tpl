@@ -8,7 +8,6 @@
                 <div class="form-group">
                     <input type="text" id="search" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <div class="table-operation btn-group">
                 <button type="button" id="create_row" class="btn btn-success">新建Item</button>

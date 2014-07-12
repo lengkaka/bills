@@ -189,12 +189,12 @@ table
 }
 .table-items-detail-content-header {
     max-width: 800px;
-    height: 38px;
+    height: 36px;
     -ms-overflow: hidden; /* for ie */
     overflow: hidden;
 
     position: absolute;
-    top: 265px;
+    top: 264px;
     left: 180px;
     background-color:white;
 }
